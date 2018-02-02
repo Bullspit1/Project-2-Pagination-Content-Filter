@@ -23,18 +23,35 @@ window.addEventListener("load", function(){
 });
 
 function showPage(pageNumber, studentList){
-  const student = document.querySelectorAll('.student-list');
-  student[0].style.display = 'none';
+  let perPage = 0;
+  // const student = document.querySelectorAll('.student-list');
+  // student[0].style.display = 'none';
 // console.log(studentList[0]);
   for (var i = 0; i < studentList.length; i++) {
+    studentList[i].style.display = 'none';
     // console.log(i);
-    // console.log(pageNumber);
-    // console.log(studentList[i]);
+    perPage += 1;
+    // console.log(pageNumber === 10);
+    // console.log(i < i  perPage);
+    // console.log(i);
+    // console.log(i % 10);
+    // console.log(i);
+    console.log(i);
+    // console.log(pageNumber + 0);
+    // console.log((pageNumber + 0) - 10);
+    console.log(i < pageNumber + 0 && i >= (pageNumber + 0) - 10);
+    // console.log(perPage === )
+    // console.log(perPage < 10);
+    // console.log(i);
+    // console.log(i / pageNumber);
+    // console.log(pageNumber % 10);
     //TODO Find out what to put in if statement so it displays 10 students per page
-    // if(i % pageNumber){
-    //   console.log('ya');
-    // //   // students[i].style.display = 'block';
-    // }
+    if(i < pageNumber + 0 && i >= (pageNumber + 0) - 10){
+      // console.log(i + 1 % 10 && i < pageNumber + 0);
+      // console.log(i % 10);
+      // console.log(studentList[i]);
+      studentList[i].style.display = 'block';
+    }
     // console.log(pageNumber);
   }
 }
@@ -55,9 +72,12 @@ function appendPageLinks(studentList){
     // const liContainer = paginationContainer[0].querySelectorAll('li a');
 //TODO Fix this ISSUE It selcts the ul on the page
       paginationContainer[0].addEventListener("click", function(e){
-        // console.log(e.target.className = 'active');
-        showPage(e.target, studentList)
+        // console.log(e.target.innerHTML);
+        showPage(e.target.innerHTML, studentList);
         e.target.className = 'active';
+        // if (e.target.className = '' || ) {
+        //
+        // }
       });
 
 
