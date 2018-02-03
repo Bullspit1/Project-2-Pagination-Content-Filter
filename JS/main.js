@@ -1,5 +1,5 @@
 const students = document.getElementsByClassName('student-item');
-// const page = document.getElementsByClassName('pages');
+const pages = document.getElementsByTagName('a');
 
 window.addEventListener("load", function(){
      // var l = document.querySelector()
@@ -23,64 +23,76 @@ window.addEventListener("load", function(){
 });
 
 function showPage(pageNumber, studentList){
-  let perPage = 0;
+
   // const student = document.querySelectorAll('.student-list');
   // student[0].style.display = 'none';
 // console.log(studentList[0]);
-  for (var i = 0; i < studentList.length; i++) {
+  for (let i = 0; i < studentList.length; i++) {
     studentList[i].style.display = 'none';
     // console.log(i);
-    perPage += 1;
-    // console.log(pageNumber === 10);
-    // console.log(i < i  perPage);
-    // console.log(i);
-    // console.log(i % 10);
-    // console.log(i);
-    console.log(i);
-    // console.log(pageNumber + 0);
-    // console.log((pageNumber + 0) - 10);
-    console.log(i < pageNumber + 0 && i >= (pageNumber + 0) - 10);
-    // console.log(perPage === )
-    // console.log(perPage < 10);
-    // console.log(i);
-    // console.log(i / pageNumber);
-    // console.log(pageNumber % 10);
+    // console.log(i < pageNumber + 0 && i >= (pageNumber + 0) - 10);
     //TODO Find out what to put in if statement so it displays 10 students per page
     if(i < pageNumber + 0 && i >= (pageNumber + 0) - 10){
-      // console.log(i + 1 % 10 && i < pageNumber + 0);
-      // console.log(i % 10);
-      // console.log(studentList[i]);
       studentList[i].style.display = 'block';
     }
-    // console.log(pageNumber);
   }
 }
 
 
 function appendPageLinks(studentList){
-  let pages = Math.ceil(studentList.length / 10);
-  let pageLink = '<ul>';
+  let pageNum = Math.ceil(studentList.length / 10);
+  let pageLink = '<div class="pagination"><ul>';
   // '<li class="pages"><a href="#">2</a></li>'
-    for (var i = 1; i < pages + 1; i++) {
-      pageLink += '<li class="pages"><a href="#">' + i + '</a></li>';
+    for (let i = 1; i < pageNum + 1; i++) {
+      pageLink += '<li><a href="#">' + i + '</a></li>';
     }
-    pageLink += '</ul>';
+    pageLink += '</ul></div>';
 
-    const paginationContainer = document.getElementsByClassName('pagination');
-    paginationContainer[0].innerHTML = pageLink;
+    const ulContainer = document.getElementsByClassName('student-list');
+    // paginationContainer[0].innerHTML = pageLink;
+    ulContainer[0].insertAdjacentHTML('afterend', pageLink);
 
-    // const liContainer = paginationContainer[0].querySelectorAll('li a');
-//TODO Fix this ISSUE It selcts the ul on the page
-      paginationContainer[0].addEventListener("click", function(e){
-        // console.log(e.target.innerHTML);
-        showPage(e.target.innerHTML, studentList);
-        e.target.className = 'active';
-        // if (e.target.className = '' || ) {
-        //
+    pages[0].className = 'active';
+
+    for (let p = 0; p < pageNum; p++) {
+        //TODO Fix this ISSUE It selcts the ul on the page
+      pages[p].addEventListener("click", function(e){
+        // console.log(this);
+        // console.log(this.classList[0]);
+        // console.log(this.className !== 'pages active');
+        showPage(this.innerHTML, studentList);
+        // console.log(pages[p]);
+        // console.log(pages[p].classList.remove('active'));
+        for (let y = 0; y < pageNum; y++) {
+          // console.log(pages[y]);
+          pages[y].className = "";
+        }
+        // linkWipe.className = "";
+          // paginationContainer[p].className = '';
+          this.className = 'active';
+          // if(this){
+            // console.log(pages[p].classList.remove("active"));
+            // if(){
+            //
+            // }
+            // else{
+            //
+            // }
+            // console.log('added');
+            // this.className += ' active';
+          // }
+          // else if(pages[p].className === ){
+          //   pages[p].remove()
+          // }
+
+        // else{
+        //   pages[p].className = 'pages';
         // }
       });
-
-
+      // if(paginationContainer[p]){
+      //
+      // }
+     }
   }
 
 
