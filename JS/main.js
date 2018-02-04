@@ -1,5 +1,6 @@
 const students = document.getElementsByClassName('student-item');
 const pages = document.getElementsByTagName('a');
+const ulContainer = document.getElementsByClassName('student-list');
 
 window.addEventListener("load", function(){
      // var l = document.querySelector()
@@ -48,7 +49,7 @@ function appendPageLinks(studentList){
     }
     pageLink += '</ul></div>';
 
-    const ulContainer = document.getElementsByClassName('student-list');
+
     // paginationContainer[0].innerHTML = pageLink;
     ulContainer[0].insertAdjacentHTML('afterend', pageLink);
 
@@ -67,80 +68,115 @@ function appendPageLinks(studentList){
           // console.log(pages[y]);
           pages[y].className = "";
         }
-        // linkWipe.className = "";
-          // paginationContainer[p].className = '';
           this.className = 'active';
-          // if(this){
-            // console.log(pages[p].classList.remove("active"));
-            // if(){
-            //
-            // }
-            // else{
-            //
-            // }
-            // console.log('added');
-            // this.className += ' active';
-          // }
-          // else if(pages[p].className === ){
-          //   pages[p].remove()
-          // }
-
-        // else{
-        //   pages[p].className = 'pages';
-        // }
       });
-      // if(paginationContainer[p]){
-      //
-      // }
      }
   }
 
 
-// function links(){
-//   var pages = 10;
-//   // var arr = [];
-//
-//   for (var i = 0; i < students.length; i++) {
-//     // pages += 1;
-//     // console.log(i);
-//     // if(i == 10){
-//     //   pages += 20;
-//     //   // console.log("hello");
-//     // }
-//     if(i === pages){
-//       pages += 10;
-//       console.log('new page');
-//     }
-//       // if(){
-//       //   pages += 1;
-//       // }
-//     // }
-//   }
-//   console.log('---------------')
-//   console.log(pages);
-// }
-// links();
 
-// var pagination = document.querySelector(".pagination");
-// pagination.addEventListener("click", function(e){
-//
-//
-//   // console.log(e.target);
-//   // console.log(e);
-//   // if(e.target.className === ''){
-//   //   // for (var i = 0; i < array.length; i++) {
-//   //   //   array[i]
-//   //   // }
-//   //   // var d = e.target.length;
-//   //   // console.log(d);
-//   // }
-//
-//
-//
-//     // e.target.className = 'active';
-//     // var pagA = getElementsByTagName('a');
-//     // pagA.removeAttribute('active');
-//     // console.log(pagA);
-//
-//
-// });
+
+  searchList();
+  function searchList(){
+    const searchPlace = document.querySelector('.page .page-header');
+    searchPlace.insertAdjacentHTML("beforeend", '<div class="student-search"><input placeholder="Search for students..."><button>Search</button></div>');
+    // ulContainer[0].insertAdjacentHTML('afterend', "<div class='noStudents'>No Student's Found</div>");
+
+    const searchButton = document.getElementsByTagName('button');
+    searchButton[0].addEventListener("click", function(){
+
+
+    const searchInput = document.getElementsByTagName('input');
+    let searchValue = searchInput[0].value;
+    const studentNames = document.getElementsByTagName('h3');
+    const studentEmails = document.getElementsByClassName('email');
+    // console.log(searchValue.toLowerCase());
+    // console.log("-------------");
+    // let studentMatchArr = [];
+
+    for (let i = 0; i < students.length; i++) {
+      // let studentString = "";
+      // console.log(searchValue.toLowerCase());
+      // console.log(searchValue.length);
+      // console.log(document.getElementsByTagName('h3')[i].innerHTML);
+      // console.log(studentNames[i].innerHTML.toUpperCase().indexOf(searchValue.toUpperCase()) > -1);
+      // console.log(studentEmails[i].innerHTML.toUpperCase().indexOf(searchValue.toUpperCase()) > -1);
+      // studentNames[i].innerHTML.join();
+      // studentArr += studentNames[i].innerHTML.split("", searchValue.length);
+      // console.log(studentArr);
+      // console.log(studentArr);
+
+      // console.log(searchValue.toLowerCase() == studentNames[i].innerHTML);
+      // console.log(studentNames[i].innerHTML.length);
+      // console.log(searchValue.toLowerCase() == studentNames[i].innerHTML);
+      // console.log(searchValue.toLowerCase().indexOf(studentNames[i].innerHTML) >= 0);
+      // console.log('______________');
+      // console.log(document.getElementsByClassName('email')[i].innerHTML);
+      // console.log(studentNames[i].innerHTML.toUpperCase().indexOf(searchValue.toUpperCase()) === 0);
+      // console.log(document.getElementsByTagName('h3')[i].innerHTML);
+
+      // console.log(studentNames[i].innerHTML.toUpperCase().indexOf(searchValue.toUpperCase()) === -1);
+      // console.log(studentNames[i].innerHTML.toUpperCase().indexOf(searchValue.toUpperCase()) > -1 );
+      const indexOfStudents = studentNames[i].innerHTML.toUpperCase().indexOf(searchValue.toUpperCase());
+      const indexOfEmails = studentEmails[i].innerHTML.toUpperCase().indexOf(searchValue.toUpperCase());
+//TODO add so if they dont wright and search it shows nothing rather than everyone
+      if(indexOfStudents > -1 || indexOfEmails > -1){
+        // studentMatchArr.push(students[i]);
+        students[i].style.display = "block";
+      }
+      else{
+        students[i].style.display = "none";
+      }
+      // console.log(indexOfStudents > -1);
+
+      // if(students[i].style.display === "none"){
+      //   ulContainer[0].insertAdjacentHTML('afterend', "<div class='noStudents'>No Student's Found</div>");
+      // }
+      // if(indexOfStudents === -1){
+      //   students[i].style.display = "none";
+      //   // console.log('work');
+      // }
+      // if(studentNames[i].style.display === 'none'){
+      //   ulContainer[0].insertAdjacentHTML('afterend', "<div class='noStudents'>No Student's Found</div>");
+      // }
+      // if(students[i].style.display = "block"){
+      //   students[i].style.display = "none";
+      // }
+
+      // if(students[i].style.display = "none"){
+      //   ulContainer[0].insertAdjacentHTML('afterend', "<div>No Student's Found</div>");
+      // }
+      // else{
+      //   students[i].style.display = "none";
+      //   ulContainer[0].insertAdjacentHTML('afterend', "<div>No Student's Found</div>");
+      // }
+      // if(indexOfStudents === -1 || indexOfStudents === 0){
+      //   students[i].style.display = "none";
+      //   ulContainer[0].insertAdjacentHTML('afterend', "<div>No Student's Found</div>");
+      // }
+
+      // if(studentNames[i].innerHTML.toUpperCase().indexOf(searchValue.toUpperCase()) > -1 || studentEmails[i].innerHTML.toUpperCase().indexOf(searchValue.toUpperCase()) > -1){
+      //   students[i].style.display = "none";
+      //   // ulContainer[0].innerHTML = "<div>No Student's Found</div>";
+      // }
+      // if(studentNames[i].indexOf('searchValue') >= 0){
+      //   console.log(true);
+      // }
+    }
+    // console.log(studentMatchArr);
+  });
+
+
+
+
+
+    // searchButton.addEventListener("click", function(){
+    //   console.log('e');
+    //   console.log(searchValue);
+    // });
+  //
+  //
+  //
+  //
+  //
+  }
