@@ -30,7 +30,7 @@ function showPage(pageNumber, studentList){
   // student[0].style.display = 'none';
 // console.log(studentList[0]);
   for (let i = 0; i < studentList.length; i++) {
-    studentList[i].style.display = 'none';
+    // studentList[i].style.display = 'none';
     // console.log(i);
     // console.log(i < pageNumber + 0 && i >= (pageNumber + 0) - 10);
     //TODO Find out what to put in if statement so it displays 10 students per page
@@ -44,12 +44,18 @@ function showPage(pageNumber, studentList){
 function appendPageLinks(studentList){
   let pageNum = Math.ceil(studentList.length / 10);
   let pageLink = '<div class="pagination"><ul>';
+
+
   // '<li class="pages"><a href="#">2</a></li>'
     for (let i = 1; i < pageNum + 1; i++) {
       pageLink += '<li><a href="#">' + i + '</a></li>';
     }
     pageLink += '</ul></div>';
 
+    // console.log(document.getElementsByClassName('.pagination').length);
+    // if(){
+    //
+    // }
 
     // paginationContainer[0].innerHTML = pageLink;
     ulContainer[0].insertAdjacentHTML('afterend', pageLink);
@@ -99,7 +105,9 @@ function appendPageLinks(studentList){
       //
       // }
       //TODO This is not removing
-      document.querySelector('.pagination').remove();
+      // console.log(document.querySelector('.pagination'));
+      // $('div').remove('.pagination');
+      $('div.pagination ul').remove();
 
 
     for (let i = 0; i < students.length; i++) {
@@ -118,15 +126,21 @@ function appendPageLinks(studentList){
     const studentsFoundDiv = document.getElementsByClassName('found');
 //TODO this should use the appendPageLinks function again when the input length is 0
     if(searchValue.length === 0){
-      // alert("wroks");
+      console.log("wroks");
+      console.log(studentMatchArr);
+      // students.style.display = 'block';
       appendPageLinks(students);
+      // searchList();
     }
-
-    if(studentMatchArr.length > 0){//&& searchValue.length !== 0
-      // console.log('show');
+    else if(studentMatchArr.length >= 0){//&& searchValue.length !== 0
+      console.log('show');
       for (var i = 0; i < studentMatchArr.length; i++) {
-        studentMatchArr[i].style.display = 'block';
+        if(studentMatchArr.length > 10){
+            appendPageLinks(studentMatchArr.length);
+        }
+        // studentMatchArr[i].style.display = 'block';
       }
+
       if(studentsFoundDiv.length === 1){
         studentsFoundDiv[0].remove();
       }
@@ -139,7 +153,7 @@ function appendPageLinks(studentList){
 
       if(studentsFoundDiv.length === 0){
       ulContainer[0].insertAdjacentHTML('afterend', "<div class='found'>No Student's Found</div>");
-      // console.log('nothing');
+      console.log('nothing');
       }
     }
 
