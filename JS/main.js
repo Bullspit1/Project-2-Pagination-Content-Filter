@@ -17,6 +17,7 @@ window.addEventListener("load", function(){
        }
      }
      appendPageLinks(students);
+     searchList();
 
      // const pages = Math.ceil(students.length / 10);
      // showPage(pages, students);
@@ -56,7 +57,7 @@ function appendPageLinks(studentList){
     pages[0].className = 'active';
 
     for (let p = 0; p < pageNum; p++) {
-        //TODO Fix this ISSUE It selcts the ul on the page
+
       pages[p].addEventListener("click", function(e){
         // console.log(this);
         // console.log(this.classList[0]);
@@ -76,93 +77,82 @@ function appendPageLinks(studentList){
 
 
 
-  searchList();
+
   function searchList(){
-    const searchPlace = document.querySelector('.page .page-header');
+    const searchPlace = document.querySelector('div.page-header');
+    // console.log(searchPlace);
     searchPlace.insertAdjacentHTML("beforeend", '<div class="student-search"><input placeholder="Search for students..."><button>Search</button></div>');
     // ulContainer[0].insertAdjacentHTML('afterend', "<div class='noStudents'>No Student's Found</div>");
 
+
+
     const searchButton = document.getElementsByTagName('button');
     searchButton[0].addEventListener("click", function(){
-
 
     const searchInput = document.getElementsByTagName('input');
     let searchValue = searchInput[0].value;
     const studentNames = document.getElementsByTagName('h3');
     const studentEmails = document.getElementsByClassName('email');
-    // console.log(searchValue.toLowerCase());
-    // console.log("-------------");
-    // let studentMatchArr = [];
+    let studentMatchArr = [];
+
+      // if(){
+      //
+      // }
+      //TODO This is not removing
+      document.querySelector('.pagination').remove();
+
 
     for (let i = 0; i < students.length; i++) {
-      // let studentString = "";
-      // console.log(searchValue.toLowerCase());
-      // console.log(searchValue.length);
-      // console.log(document.getElementsByTagName('h3')[i].innerHTML);
-      // console.log(studentNames[i].innerHTML.toUpperCase().indexOf(searchValue.toUpperCase()) > -1);
-      // console.log(studentEmails[i].innerHTML.toUpperCase().indexOf(searchValue.toUpperCase()) > -1);
-      // studentNames[i].innerHTML.join();
-      // studentArr += studentNames[i].innerHTML.split("", searchValue.length);
-      // console.log(studentArr);
-      // console.log(studentArr);
+      students[i].style.display = 'none';
 
-      // console.log(searchValue.toLowerCase() == studentNames[i].innerHTML);
-      // console.log(studentNames[i].innerHTML.length);
-      // console.log(searchValue.toLowerCase() == studentNames[i].innerHTML);
-      // console.log(searchValue.toLowerCase().indexOf(studentNames[i].innerHTML) >= 0);
-      // console.log('______________');
-      // console.log(document.getElementsByClassName('email')[i].innerHTML);
-      // console.log(studentNames[i].innerHTML.toUpperCase().indexOf(searchValue.toUpperCase()) === 0);
-      // console.log(document.getElementsByTagName('h3')[i].innerHTML);
-
-      // console.log(studentNames[i].innerHTML.toUpperCase().indexOf(searchValue.toUpperCase()) === -1);
-      // console.log(studentNames[i].innerHTML.toUpperCase().indexOf(searchValue.toUpperCase()) > -1 );
       const indexOfStudents = studentNames[i].innerHTML.toUpperCase().indexOf(searchValue.toUpperCase());
       const indexOfEmails = studentEmails[i].innerHTML.toUpperCase().indexOf(searchValue.toUpperCase());
 //TODO add so if they dont wright and search it shows nothing rather than everyone
       if(indexOfStudents > -1 || indexOfEmails > -1){
         // studentMatchArr.push(students[i]);
-        students[i].style.display = "block";
+        // students[i].style.display = "block";
+        studentMatchArr.push(students[i]);
       }
-      else{
-        students[i].style.display = "none";
-      }
-      // console.log(indexOfStudents > -1);
-
-      // if(students[i].style.display === "none"){
-      //   ulContainer[0].insertAdjacentHTML('afterend', "<div class='noStudents'>No Student's Found</div>");
-      // }
-      // if(indexOfStudents === -1){
-      //   students[i].style.display = "none";
-      //   // console.log('work');
-      // }
-      // if(studentNames[i].style.display === 'none'){
-      //   ulContainer[0].insertAdjacentHTML('afterend', "<div class='noStudents'>No Student's Found</div>");
-      // }
-      // if(students[i].style.display = "block"){
-      //   students[i].style.display = "none";
-      // }
-
-      // if(students[i].style.display = "none"){
-      //   ulContainer[0].insertAdjacentHTML('afterend', "<div>No Student's Found</div>");
-      // }
-      // else{
-      //   students[i].style.display = "none";
-      //   ulContainer[0].insertAdjacentHTML('afterend', "<div>No Student's Found</div>");
-      // }
-      // if(indexOfStudents === -1 || indexOfStudents === 0){
-      //   students[i].style.display = "none";
-      //   ulContainer[0].insertAdjacentHTML('afterend', "<div>No Student's Found</div>");
-      // }
-
-      // if(studentNames[i].innerHTML.toUpperCase().indexOf(searchValue.toUpperCase()) > -1 || studentEmails[i].innerHTML.toUpperCase().indexOf(searchValue.toUpperCase()) > -1){
-      //   students[i].style.display = "none";
-      //   // ulContainer[0].innerHTML = "<div>No Student's Found</div>";
-      // }
-      // if(studentNames[i].indexOf('searchValue') >= 0){
-      //   console.log(true);
-      // }
     }
+
+    const studentsFoundDiv = document.getElementsByClassName('found');
+//TODO this should use the appendPageLinks function again when the input length is 0
+    if(searchValue.length === 0){
+      // alert("wroks");
+      appendPageLinks(students);
+    }
+
+    if(studentMatchArr.length > 0){//&& searchValue.length !== 0
+      // console.log('show');
+      for (var i = 0; i < studentMatchArr.length; i++) {
+        studentMatchArr[i].style.display = 'block';
+      }
+      if(studentsFoundDiv.length === 1){
+        studentsFoundDiv[0].remove();
+      }
+    }
+    // else if(){
+    //
+    //
+    // }
+    else{
+
+      if(studentsFoundDiv.length === 0){
+      ulContainer[0].insertAdjacentHTML('afterend', "<div class='found'>No Student's Found</div>");
+      // console.log('nothing');
+      }
+    }
+
+    // if(studentMatchArr.length === 0){
+    //   if(studentsFoundDiv.length === 0){
+    //   ulContainer[0].insertAdjacentHTML('afterend', "<div class='found'>No Student's Found</div>");
+    //   console.log('nothing');
+    //   }
+    // }
+    // console.log(searchValue.length);
+    // console.log(studentsFoundDiv);
+    // console.log(studentsFoundDiv.length);
+    // // console.log(studentMatchArr);
     // console.log(studentMatchArr);
   });
 
